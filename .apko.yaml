@@ -17,6 +17,6 @@ accounts:
 
 os-release:
   id: alpine
-  version-id: '3.16.0'
+  version-id: '3.15.0'
   name: 'Alpine iptables'
   pretty-name: 'Alpine iptables (apko)'
