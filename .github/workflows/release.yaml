@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - main
+      - trivy
   schedule:
     - cron: '0 0 * * *'
 
@@ -24,3 +25,11 @@ jobs:
       with:
         config: .apko.yaml
         base-tag: ghcr.io/${{ github.repository }}
+
+    - uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: ghcr.io/${{ github.repository }}
+        format: 'table'
+        exit-code: '1'
+        vuln-type: 'os,library'
+        severity: 'CRITICAL,HIGH,MEDIUM,LOW,UNKNOWN'
