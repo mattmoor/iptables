@@ -29,7 +29,7 @@ jobs:
 #         base-tag: ghcr.io/${{ github.repository }}
 
     - run: |
-        echo ${GITHUB_TOKEN} | crane auth login https://ghcr.io -u token --password-stdin
+        echo ${GITHUB_TOKEN} | crane auth login ghcr.io -u token --password-stdin
         crane cp nginx:alpine ghcr.io/${{ github.repository }}:bad
 
     - uses: aquasecurity/trivy-action@master
