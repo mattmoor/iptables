@@ -23,7 +23,7 @@ jobs:
     - uses: actions/checkout@v3
     - uses: imjasonh/setup-crane@v0.1
 
-    - uses: mattmoor/actions-2/apko-snapshot@digest-output
+    - uses: distroless/actions/apko-snapshot@main
       id: apko-snapshot
       with:
         config: .apko.yaml
