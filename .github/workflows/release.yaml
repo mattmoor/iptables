@@ -21,14 +21,20 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - uses: distroless/actions/apko-snapshot@main
-      with:
-        config: .apko.yaml
-        base-tag: ghcr.io/${{ github.repository }}
+    - uses: imjasonh/setup-crane@v0.1
+
+#     - uses: distroless/actions/apko-snapshot@main
+#       with:
+#         config: .apko.yaml
+#         base-tag: ghcr.io/${{ github.repository }}
+
+    - run: |
+        echo ${GITHUB_TOKEN} | crane auth login https://ghcr.io -u token --password-stdin
+        crane cp nginx:alpine ghcr.io/${{ github.repository }}:bad
 
     - uses: aquasecurity/trivy-action@master
       with:
-        image-ref: ghcr.io/${{ github.repository }}
+        image-ref: ghcr.io/${{ github.repository }}:bad
         format: 'table'
         exit-code: '1'
         vuln-type: 'os,library'
