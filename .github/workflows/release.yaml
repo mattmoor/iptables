@@ -17,36 +17,14 @@ jobs:
     permissions:
       id-token: write
       packages: write
-      # This is to support uploading CodeQL results
-      contents: write
+      contents: read
 
     steps:
     - uses: actions/checkout@v3
     - uses: imjasonh/setup-crane@v0.1
 
-    - uses: mattmoor/actions-2/apko-snapshot@trivy-scan-images
+    - uses: mattmoor/actions-2/apko-snapshot@trivy-attest
       id: apko-snapshot
       with:
         config: .apko.yaml
         base-tag: ghcr.io/${{ github.repository }}
-
-#     - run: |
-#         echo "${{ github.token }}" | crane auth login ghcr.io --username "${{ github.actor }}" --password-stdin
-#         crane cp nginx:alpine ghcr.io/${{ github.repository }}:bad
-
-#     - uses: aquasecurity/trivy-action@master
-#       with:
-#         image-ref: ghcr.io/${{ github.repository }}:bad
-#         format: 'sarif'
-#         exit-code: '0'
-#         vuln-type: 'os,library'
-#         severity: 'CRITICAL,HIGH,MEDIUM,LOW,UNKNOWN'
-
-#     - uses: aquasecurity/trivy-action@master
-#       with:
-#         image-ref: ghcr.io/${{ github.repository }}:bad
-#         format: 'json'
-#         exit-code: '0'
-#         vuln-type: 'os,library'
-#         severity: 'CRITICAL,HIGH,MEDIUM,LOW,UNKNOWN'
-
