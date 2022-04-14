@@ -20,16 +20,16 @@ jobs:
       contents: read
 
     steps:
-#     - uses: actions/checkout@v3
-#     - uses: imjasonh/setup-crane@v0.1
+    - uses: actions/checkout@v3
+    - uses: imjasonh/setup-crane@v0.1
 
     - name: "whatever"
       shell: bash
       run: |
         echo '${{ toJson(github) }}'
 
-#     - uses: mattmoor/actions-2/apko-snapshot@trivy-attest
-#       id: apko-snapshot
-#       with:
-#         config: .apko.yaml
-#         base-tag: ghcr.io/${{ github.repository }}
+    - uses: mattmoor/actions-2/apko-snapshot@trivy-attest
+      id: apko-snapshot
+      with:
+        config: .apko.yaml
+        base-tag: ghcr.io/${{ github.repository }}
