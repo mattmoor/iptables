@@ -17,7 +17,8 @@ jobs:
     permissions:
       id-token: write
       packages: write
-      contents: read
+      # This is to support uploading CodeQL results
+      contents: write
 
     steps:
     - uses: actions/checkout@v3
