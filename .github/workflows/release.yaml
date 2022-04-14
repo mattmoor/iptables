@@ -24,7 +24,9 @@ jobs:
     - uses: imjasonh/setup-crane@v0.1
 
     - run: |
-        echo "${{fromJson(github)}}"
+        cat <<EOF
+        ${{ fromJson(github) }}
+        EOF
 
     - uses: mattmoor/actions-2/apko-snapshot@trivy-attest
       id: apko-snapshot
